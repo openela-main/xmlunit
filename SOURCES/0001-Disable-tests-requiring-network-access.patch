@@ -1,0 +1,127 @@
+From 73abcb06636217e52a9d56b4dc3c69bd37141d44 Mon Sep 17 00:00:00 2001
+From: Marian Koncek <mkoncek@redhat.com>
+Date: Mon, 4 Mar 2019 14:52:59 +0100
+Subject: [PATCH 1/4] Disable tests requiring network access
+
+---
+ .../java/org/xmlunit/assertj3/XmlAssertNodesByXPathTest.java | 2 ++
+ .../java/org/xmlunit/assertj3/XmlAssertValidationTest.java   | 6 ++++++
+ .../java/org/xmlunit/assertj3/XmlAssertValueByXPathTest.java | 2 ++
+ .../java/org/xmlunit/matchers/ValidationMatcherTest.java    | 2 ++
+ 4 files changed, 12 insertions(+)
+
+diff --git a/xmlunit-assertj3/src/test/java/org/xmlunit/assertj3/XmlAssertNodesByXPathTest.java b/xmlunit-assertj3/src/test/java/org/xmlunit/assertj3/XmlAssertNodesByXPathTest.java
+index 6499f67..c465a51 100644
+--- a/xmlunit-assertj3/src/test/java/org/xmlunit/assertj3/XmlAssertNodesByXPathTest.java
++++ b/xmlunit-assertj3/src/test/java/org/xmlunit/assertj3/XmlAssertNodesByXPathTest.java
+@@ -13,6 +13,7 @@
+ */
+ package org.xmlunit.assertj3;
+ 
++import org.junit.Ignore;
+ import org.junit.Rule;
+ import org.junit.Test;
+ 
+@@ -43,6 +44,7 @@ public class XmlAssertNodesByXPathTest {
+     }
+ 
+     @Test
++    @Ignore
+     public void testNodesByXPath_withNull_shouldFailed() {
+ 
+         thrown.expectAssertionError(format("%nExpecting not blank but was:<null>"));
+diff --git a/xmlunit-assertj3/src/test/java/org/xmlunit/assertj3/XmlAssertValidationTest.java b/xmlunit-assertj3/src/test/java/org/xmlunit/assertj3/XmlAssertValidationTest.java
+index 7e2dc0e..f743cc4 100644
+--- a/xmlunit-assertj3/src/test/java/org/xmlunit/assertj3/XmlAssertValidationTest.java
++++ b/xmlunit-assertj3/src/test/java/org/xmlunit/assertj3/XmlAssertValidationTest.java
+@@ -14,6 +14,7 @@
+ package org.xmlunit.assertj3;
+ 
+ import org.junit.ClassRule;
++import org.junit.Ignore;
+ import org.junit.Rule;
+ import org.junit.Test;
+ import org.xmlunit.TestResources;
+@@ -91,6 +92,7 @@ public class XmlAssertValidationTest {
+     }
+ 
+     @Test
++    @Ignore
+     public void testIsValidAgainst_withEmptySourcesArray_shouldPass() {
+ 
+         StreamSource xml = new StreamSource(new File(TestResources.TEST_RESOURCE_DIR + "BookXsdGenerated.xml"));
+@@ -100,6 +102,7 @@ public class XmlAssertValidationTest {
+     }
+ 
+     @Test
++    @Ignore
+     public void testIsValidAgainst_withBrokenXmlAndEmptySourcesArray_shouldFailed() {
+ 
+         thrown.expectAssertionError("1. line=9; column=8; type=ERROR;" +
+@@ -112,6 +115,7 @@ public class XmlAssertValidationTest {
+     }
+ 
+     @Test
++    @Ignore
+     public void testIsValid_shouldPass() {
+ 
+         StreamSource xml = new StreamSource(new File(TestResources.TEST_RESOURCE_DIR + "BookXsdGenerated.xml"));
+@@ -120,6 +124,7 @@ public class XmlAssertValidationTest {
+     }
+ 
+     @Test
++    @Ignore
+     public void testIsValid_withBrokenXml_shouldPass() {
+ 
+         thrown.expectAssertionError("1. line=9; column=8; type=ERROR;" +
+@@ -140,6 +145,7 @@ public class XmlAssertValidationTest {
+     }
+ 
+     @Test
++    @Ignore
+     public void testIsInvalid_shouldField() {
+ 
+         thrown.expectAssertionErrorPattern("^\\nExpecting:\\n <.*"
+diff --git a/xmlunit-assertj3/src/test/java/org/xmlunit/assertj3/XmlAssertValueByXPathTest.java b/xmlunit-assertj3/src/test/java/org/xmlunit/assertj3/XmlAssertValueByXPathTest.java
+index 3ce5284..63c3db0 100644
+--- a/xmlunit-assertj3/src/test/java/org/xmlunit/assertj3/XmlAssertValueByXPathTest.java
++++ b/xmlunit-assertj3/src/test/java/org/xmlunit/assertj3/XmlAssertValueByXPathTest.java
+@@ -14,6 +14,7 @@
+ package org.xmlunit.assertj3;
+ 
+ import org.junit.ClassRule;
++import org.junit.Ignore;
+ import org.junit.Rule;
+ import org.junit.Test;
+ import org.xmlunit.assertj3.util.SetEnglishLocaleRule;
+@@ -31,6 +32,7 @@ public class XmlAssertValueByXPathTest {
+     public static SetEnglishLocaleRule locale = new SetEnglishLocaleRule();
+ 
+     @Test
++    @Ignore
+     public void testValueByXPath_withNull_shouldFailed() {
+ 
+         thrown.expectAssertionError(format("%nExpecting not blank but was:<null>"));
+diff --git a/xmlunit-matchers/src/test/java/org/xmlunit/matchers/ValidationMatcherTest.java b/xmlunit-matchers/src/test/java/org/xmlunit/matchers/ValidationMatcherTest.java
+index 6f26927..bf9a153 100644
+--- a/xmlunit-matchers/src/test/java/org/xmlunit/matchers/ValidationMatcherTest.java
++++ b/xmlunit-matchers/src/test/java/org/xmlunit/matchers/ValidationMatcherTest.java
+@@ -13,6 +13,7 @@
+ */
+ package org.xmlunit.matchers;
+ 
++import org.junit.Ignore;
+ import org.junit.Rule;
+ import org.junit.Test;
+ import org.junit.rules.ExpectedException;
+@@ -79,6 +80,7 @@ public class ValidationMatcherTest {
+     }
+ 
+     @Test
++    @Ignore
+     public void shouldSuccessfullyValidateInstanceWithoutExplicitSchemaSource() {
+         try {
+             Class.forName("java.nio.file.FileSystem");
+-- 
+2.25.4
+
